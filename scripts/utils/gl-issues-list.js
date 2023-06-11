@@ -16,7 +16,7 @@ async function getIssues(){
                         field: CREATED_AT, 
                         direction: DESC
                     }, 
-                    labels: ${label ? [label] : null}, 
+                    labels: ${label ? "["+label+"]" : null}, 
                     first: ${pageSize},
                 ) {
                     edges {
