@@ -14,8 +14,7 @@
     "author": "",
     "license": "MIT",
     "devDependencies": {
-        "vitepress": "1.0.0-beta.2",
-        "vitepress-plugin-pagefind": "^0.2.4"
+        "vitepress": "1.0.0-beta.2"
     },
     "dependencies": {
         "@octokit/graphql": "^5.0.6",
