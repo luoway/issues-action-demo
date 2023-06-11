@@ -4,7 +4,7 @@ const { getIssue } = require('./utils/gl-issue')
 const { writeDoc } = require('./utils/write-doc')
 
 const targetDir = path.join(__dirname, '../docs')
-const targetNumber = 24
+const {number: targetNumber} = require('./constants')
 
 !(async function () {
     const filePath = path.join(targetDir, `${targetNumber}.md`)

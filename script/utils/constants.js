@@ -1,7 +1,8 @@
 module.exports = {
-    token: process.env.NODE_ENV.token,
-    owner: process.env.NODE_ENV.owner,
-    repoName: process.env.NODE_ENV.repository,
-    label: process.env.NODE_ENV.label || 'deploy',
-    pageSize: process.env.NODE_ENV.size || 999,
+    token: process.env.GITHUB_TOKEN,
+    owner: process.env.GITHUB_OWNER,
+    repoName: process.env.GITHUB_REPO.split('/')[1],
+    label: process.env.LABEL || 'deploy',
+    pageSize: process.env.SIZE || 999,
+    number: process.env.NUMBER,
 }
