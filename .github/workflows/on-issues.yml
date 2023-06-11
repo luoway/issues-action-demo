@@ -27,8 +27,8 @@ jobs:
       - run: pnpm i --frozen-lockfile
       - name: Get issue
         env:
-          GITHUB_ISSUE_NUMBER: ${{ github.event.issue.number }}
-          GITHUB_ISSUE_LABELS: ${{ github.event.issue.labels }}
+          GITHUB_ISSUE_NUMBER: ${{ github.event.issues.issue.number }}
+          GITHUB_ISSUE_LABELS: ${{ github.event.issues.issue.labels }}
         run: pnpm single
       - name: Build
         run: pnpm build --base /${{ github.event.repository.name }}/
