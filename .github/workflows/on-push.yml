@@ -25,12 +25,6 @@ jobs:
         with:
           node-version: 16
           cache: pnpm
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        id: package-cache
-        with:
-          path: |
-            **/node_modules
       - run: pnpm i --frozen-lockfile
       - name: Get issues
         run: pnpm all
