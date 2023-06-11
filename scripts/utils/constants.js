@@ -5,4 +5,5 @@ module.exports = {
     label: process.env.LABEL || 'deploy',
     pageSize: process.env.SIZE || 100,
     number: process.env.NUMBER,
+    labels: process.env.GITHUB_ISSUE_LABELS,
 }

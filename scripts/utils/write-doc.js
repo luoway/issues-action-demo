@@ -12,4 +12,12 @@ module.exports = {
         }
         return fse.writeFile(filePath, `# ${issueData.title}\n${issueData.body}`)
     },
+    removeDoc(number){
+        let configStr = fse.readFileSync(configPath, 'utf-8')
+        if(configStr.search(`link: '/${number}' },`) !== -1){
+            configStr = configStr.replace(new RegExp(`{\s?text:\s?'.+?',\s?link:\s?'/${number}'\s?},`, 'g'),'')
+            console.log(19, configStr)
+            fse.writeFileSync(configPath, configStr)
+        }
+    }
 }
