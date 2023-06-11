@@ -30,7 +30,7 @@ jobs:
       - name: Get issues
         run: pnpm all
       - name: Build
-        run: pnpm vitepress build --base /${{ github.event.repository.name }}/
+        run: pnpm build --base /${{ github.event.repository.name }}/
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
