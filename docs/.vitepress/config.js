@@ -2,7 +2,6 @@ import { defineConfig } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
 export default defineConfig({
-    base: `/${process.env.NODE_ENV.repository}/`,
     title: '页面标题',
     vite: {
         plugins: [
