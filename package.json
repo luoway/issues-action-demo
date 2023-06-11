@@ -7,8 +7,8 @@
     "scripts": {
         "all": "node scripts/all",
         "single": "node scripts/single",
-        "dev": "vitepress dev",
-        "build": "vitepress build"
+        "dev": "vitepress dev docs",
+        "build": "vitepress build docs"
     },
     "keywords": [],
     "author": "",
