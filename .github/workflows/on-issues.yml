@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Label added
         run: |
-          echo "Issue ${{ github.event.issue.number }} labeled with ${{ github.event.label.name }}"  
+          echo "Issue ${{ github.event.issue.number }} ${{ github.event.action }} with ${{ github.event.label.name }}"  
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0

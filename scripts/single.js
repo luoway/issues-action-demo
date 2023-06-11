@@ -22,6 +22,7 @@ const {
         try {
             issueData = await p2
         }catch(e){
+            console.error(e)
             throw new Error('get issue fail.')
         }
         if(issueData) writeDoc(filePath, issueData)
