@@ -28,13 +28,12 @@ function genSidebar(issues, labels){
         labelMap[label] = genGroup(label)
     })
     issues.forEach(issue=>{
-        console.log(31, issue.node.labels)
-        issue.node.labels.nodes.some(label=>{
-            const labelGroup = labelMap[label]
-            if(!labelGroup) return false
+        for(let label of issue.node.labels.nodes){
+            const labelGroup = labelMap[label.name]
+            if(!labelGroup) continue
             labelGroup.items.push(genItem(issue))
-            return true
-        })
+            break
+        }
     })
     return Object.values(labelMap)
 }
