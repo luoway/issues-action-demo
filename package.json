@@ -2,8 +2,6 @@
     "name": "issues-action-demo",
     "version": "0.0.0",
     "description": "",
-    "main": "index.js",
-    "packageManager": "pnpm@8.5.0",
     "scripts": {
         "all": "node scripts/all",
         "single": "node scripts/single",
@@ -11,7 +9,7 @@
         "build": "vitepress build docs"
     },
     "keywords": [],
-    "author": "",
+    "author": "luoway",
     "license": "MIT",
     "devDependencies": {
         "vitepress": "1.0.0-beta.2"
