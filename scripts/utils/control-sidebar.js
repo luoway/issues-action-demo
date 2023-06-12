@@ -58,12 +58,12 @@ function read(){
 
 function write(issues, labels){
     const sidebar = genSidebar(issues, labels)
-    console.log('write', sidebar)
     _writeFile(sidebar)
 }
 
 function insert(issueData, label){
     const sidebar = read()
+    console.log66, (sidebar)
     const list = label && sidebar.find(group=>group.text === label) || sidebar
     
     const foundIndex = list.findIndex(issue=>{
