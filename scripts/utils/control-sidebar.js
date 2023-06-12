@@ -57,7 +57,6 @@ function read(){
 
 function write(issues, labels){
     const sidebar = genSidebar(issues, labels)
-    console.log(sidebar)
     _writeFile(sidebar)
 }
 
@@ -75,10 +74,10 @@ function insert(issueData, label){
 
     if(foundIndex > -1) {
         let isReplace = 0
-        if( sidebar[foundIndex].items[0].link.slice(1) === String(issueData.number) ) isReplace = 1
-        sidebar.splice(foundIndex, isReplace, genItem(issueData))
+        if( list[foundIndex].link.slice(1) === String(issueData.number) ) isReplace = 1
+        list.splice(foundIndex, isReplace, genItem(issueData))
     } else {
-        sidebar.push(genItem(issueData))
+        list.push(genItem(issueData))
     }
 
     _writeFile(sidebar)
