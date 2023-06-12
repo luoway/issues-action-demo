@@ -56,7 +56,9 @@ function read(){
 }
 
 function write(issues, labels){
-    _writeFile(genSidebar(issues, labels))
+    const sidebar = genSidebar(issues, labels)
+    console.log(sidebar)
+    _writeFile(sidebar)
 }
 
 function insert(issueData, label){
