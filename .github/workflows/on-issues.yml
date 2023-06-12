@@ -28,12 +28,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: pnpm
-      - run: pnpm i --frozen-lockfile
+          cache: yarn
+      - name: Install dependencies
+        if: steps.docs-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
       - name: Get issue
-        run: pnpm single
+        run: yarn single
       - name: Build
-        run: pnpm build --base /${{ github.event.repository.name }}/
+        run: yarn build --base /${{ github.event.repository.name }}/
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
