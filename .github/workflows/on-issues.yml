@@ -1,4 +1,4 @@
-name: on-issues-labeled
+name: on-issues
 on:
   issues:
     types: ['labeled', 'unlabeled', 'edited', 'reopened', 'closed', 'deleted']
