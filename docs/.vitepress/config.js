@@ -3,7 +3,7 @@ import sidebar from './sidebar'
 console.log('sidebar: ', sidebar)
 
 export default defineConfig({
-    title: '页面标题',
+    title: 'Hello',
     themeConfig: {
         outline: 'deep',
         outlineTitle: '导航',

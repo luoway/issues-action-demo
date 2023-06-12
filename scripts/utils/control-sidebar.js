@@ -63,7 +63,6 @@ function write(issues, labels){
 
 function insert(issueData, label){
     const sidebar = read()
-    console.log(66, sidebar)
     const list = label && sidebar.find(group=>group.text === label) || sidebar
     
     const foundIndex = list.findIndex(issue=>{
