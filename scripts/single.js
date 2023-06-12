@@ -8,13 +8,14 @@ const targetDir = path.join(__dirname, '../docs')
 const {
     number,
     action,
-    label,
+    labels,
     acceptLabels,
 } = require('./utils/constants')
 
 !(async function () {
-    if(!acceptLabels.includes(label)) {
-        console.log('label not in acceptLabels', label)
+    const label = labels.split(',').find(item => acceptLabels.includes(item))
+    if(!label) {
+        console.log('labels not match acceptLabels', labels)
         return process.exit(1)
     }
 

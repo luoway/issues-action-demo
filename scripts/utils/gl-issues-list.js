@@ -3,7 +3,7 @@ const {graphqlWithAuth} = require('./gl')
 const {
     owner,
     repoName,
-    label,
+    acceptLabels,
 } = require('./constants')
 
 const pageSize = 100 // github api limit
@@ -19,7 +19,7 @@ async function getIssues(labels){
                         field: CREATED_AT, 
                         direction: DESC
                     }, 
-                    labels: ${label ? `${JSON.stringify(labels)}` : null}, 
+                    labels: ${acceptLabels ? `${JSON.stringify(acceptLabels)}` : null}, 
                     first: ${pageSize},
                     after: ${last ? `"${last.cursor}"` : null}
                 ) {
