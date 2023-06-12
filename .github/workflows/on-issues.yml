@@ -28,6 +28,16 @@ jobs:
         with:
           node-version: 16
           cache: yarn
+      - name: Cache dependencies and docs
+        uses: actions/cache@v3
+        id: docs-cache
+        with:
+          path: |
+            node_modules
+            docs
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/.vitepress/config.js') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         if: steps.docs-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
