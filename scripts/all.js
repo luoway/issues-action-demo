@@ -29,5 +29,6 @@ const {
         writeDoc(filePath, issueData)
     })
 
+    console.log(issues.map(item=>item.node.number))
     Sidebar.write(issues, acceptLabels)
 })()
