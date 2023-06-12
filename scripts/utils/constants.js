@@ -7,5 +7,5 @@ module.exports = {
     labels: process.env.GITHUB_ISSUE_LABELS,
     actionLabel: process.env.GITHUB_ISSUE_LABEL,
     
-    acceptLabels: ['deploy'], // 多于一项，则显示为侧边栏分组标题
+    acceptLabels: ['deploy', 'test'], // 多于一项，则显示为侧边栏分组标题
 }
