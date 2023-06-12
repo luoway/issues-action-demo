@@ -14,7 +14,7 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
-    const label = actionLabel || labels.split(',').find(item => acceptLabels.includes(item))
+    const label = actionLabel && acceptLabels.includes(actionLabel) || labels.split(',').find(item => acceptLabels.includes(item))
 
     if(!label) {
         console.log('labels not match acceptLabels', labels)
