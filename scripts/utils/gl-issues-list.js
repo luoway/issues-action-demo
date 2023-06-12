@@ -4,10 +4,13 @@ const {
     owner,
     repoName,
     label,
-    pageSize,
 } = require('./constants')
 
-async function getIssues(){
+const pageSize = 100 // github api limit
+const total = []
+
+async function getIssues(labels){
+    const last = total.length && total[total.length - 1]
     const { repository } = await graphqlWithAuth(`
         {
             repository(owner: "${owner}", name: "${repoName}") {
@@ -16,10 +19,12 @@ async function getIssues(){
                         field: CREATED_AT, 
                         direction: DESC
                     }, 
-                    labels: ${label ? `["${label}"]` : null}, 
+                    labels: ${label ? `${JSON.stringify(labels)}` : null}, 
                     first: ${pageSize},
+                    after: ${last ? `"${last.cursor}"` : null}
                 ) {
                     edges {
+                        cursor
                         node {
                             number
                             title
@@ -36,7 +41,12 @@ async function getIssues(){
         }
     `)
 
-    return repository.issues.edges
+    if(repository?.issues?.edges?.length) {
+        total.push(...repository.issues.edges)
+        return await getIssues(labels)
+    } else {
+        return total
+    }
 }
 
 module.exports = {

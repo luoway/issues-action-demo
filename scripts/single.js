@@ -1,23 +1,27 @@
 const path = require('path')
 const fse = require('fs-extra')
 const { getIssue } = require('./utils/gl-issue')
-const { writeDoc, removeDoc } = require('./utils/write-doc')
+const { writeDoc } = require('./utils/write-doc')
+const Sidebar = require('./utils/control-sidebar')
 
 const targetDir = path.join(__dirname, '../docs')
 const {
     number,
+    action,
     label,
-    labels,
+    acceptLabels,
 } = require('./utils/constants')
 
 !(async function () {
-    console.log(labels, label)
-    if (labels.includes(label)) {
-        // add label
+    if(!acceptLabels.includes(label)) return false
+
+    if (['reopened', 'edited', 'labeled'].includes(action)) {
+        // add
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
         const p2 = getIssue(number)
         await p1
+
         let issueData
         try {
             issueData = await p2
@@ -25,9 +29,13 @@ const {
             console.error(e)
             throw new Error('get issue fail.')
         }
-        if(issueData) writeDoc(filePath, issueData)
+
+        if(issueData) {
+            writeDoc(filePath, issueData)
+            Sidebar.insert(issueData, label)
+        }
     }else{
-        // remove label
-        removeDoc(number)
+        // remove
+        Sidebar.remove(number)
     }
 })()
