@@ -1,7 +1,7 @@
 name: on-issues-labeled
 on:
   issues:
-    types: ['labeled', 'unlabeled']
+    types: ['labeled', 'unlabeled', 'edited', 'reopened', 'closed', 'deleted']
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_OWNER: ${{ github.repository_owner }}
