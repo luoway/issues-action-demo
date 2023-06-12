@@ -1,40 +1,59 @@
 name: on-push
+
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  pages: write
+  id-token: write
+
 env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    GITHUB_OWNER: ${{ github.repository_owner }}
-    GITHUB_REPO: ${{ github.repository }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_OWNER: ${{ github.repository_owner }}
+  GITHUB_REPO: ${{ github.repository }}
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: pnpm
-      - run: pnpm i --frozen-lockfile
+          cache: yarn
+      - name: Cache dependencies and docs
+        uses: actions/cache@v3
+        id: docs-cache
+        with:
+          path: |
+            node_modules
+            docs
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/.vitepress/config.js') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        if: steps.docs-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
       - name: Get issues
-        run: pnpm all
+        run: yarn all
       - name: Build
-        run: pnpm build --base /${{ github.event.repository.name }}/
+        run: yarn build --base /${{ github.event.repository.name }}/
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
           path: docs/.vitepress/dist
-      - name: Deploy
-        id: deployment
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    steps:
+      - id: deployment
         uses: actions/deploy-pages@v1
