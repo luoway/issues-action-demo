@@ -13,4 +13,7 @@ export default defineConfig({
             label: '简体中文'
         },
     },
+    build: {
+        minify: false,
+    },
 })
