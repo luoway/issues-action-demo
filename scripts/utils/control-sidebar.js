@@ -39,9 +39,7 @@ function genSidebar(issues, labels){
 
 function _writeFile(sidebar){
     fse.ensureFileSync(sidebarPath)
-    const sidebarStr = `${prefix}${JSON.stringify(sidebar)}`
-    console.log(sidebarStr)
-    fse.writeFileSync(sidebarPath, sidebarStr)
+    fse.writeFileSync(sidebarPath, `${prefix}${JSON.stringify(sidebar)}`)
 }
 
 

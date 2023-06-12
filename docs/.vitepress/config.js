@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 import sidebar from './sidebar'
-
+console.log(sidebar)
 export default defineConfig({
     title: '页面标题',
     themeConfig: {
