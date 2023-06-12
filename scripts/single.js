@@ -13,9 +13,13 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
-    if(!acceptLabels.includes(label)) return false
+    if(!acceptLabels.includes(label)) {
+        console.log('label not in acceptLabels', label)
+        return process.exit(1)
+    }
 
     if (['reopened', 'edited', 'labeled'].includes(action)) {
+        console.log('add or update issue', number)
         // add
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
@@ -35,7 +39,7 @@ const {
             Sidebar.insert(issueData, label)
         }
     }else{
-        // remove
+        console.log('remove issue', number)
         Sidebar.remove(number)
     }
 })()
