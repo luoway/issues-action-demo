@@ -5,7 +5,6 @@ const sidebarPath = path.join(__dirname, '../../docs/.vitepress/sidebar.js')
 const prefix = 'export default '
 
 function genItem(issueData){
-    console.log('genItem', issueData)
     if(issueData.node) issueData = issueData.node
     return { text: `${issueData.title}`, link: `/${issueData.number}` }
 }
@@ -57,7 +56,6 @@ function read(){
 }
 
 function write(issues, labels){
-    console.log(58, issues, labels, genSidebar(issues, labels))
     _writeFile(genSidebar(issues, labels))
 }
 
