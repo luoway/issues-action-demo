@@ -2,7 +2,7 @@ const path = require('path')
 const fse = require('fs-extra')
 const { getIssues } = require('./utils/gl-issues-list')
 const { getIssue } = require('./utils/gl-issue')
-const { writeDoc } = require('./utils/write-doc')
+const { writeDoc, cleanDoc } = require('./utils/write-doc')
 const Sidebar = require('./utils/control-sidebar')
 
 const targetDir = path.join(__dirname, '../docs')
@@ -11,6 +11,7 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
+    const p = cleanDoc()
     let issues = []
     try{
         issues = await getIssues(acceptLabels)
@@ -18,6 +19,7 @@ const {
         console.error(e)
         throw new Error('get issues fail.')
     }
+    await p
 
     issues.forEach(async item=>{
         const node = item.node
@@ -29,6 +31,6 @@ const {
         writeDoc(filePath, issueData)
     })
 
-    console.log(issues.map(item=>item.node.number))
+    console.log('issues number: ', issues.map(item=>item.node.number))
     Sidebar.write(issues, acceptLabels)
 })()

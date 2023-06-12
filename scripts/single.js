@@ -1,7 +1,7 @@
 const path = require('path')
 const fse = require('fs-extra')
 const { getIssue } = require('./utils/gl-issue')
-const { writeDoc } = require('./utils/write-doc')
+const { writeDoc, removeDoc } = require('./utils/write-doc')
 const Sidebar = require('./utils/control-sidebar')
 
 const targetDir = path.join(__dirname, '../docs')
@@ -43,6 +43,7 @@ const {
         }
     }else{
         console.log('remove issue', number)
+        removeDoc(number)
         Sidebar.remove(number)
     }
 })()
