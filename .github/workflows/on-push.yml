@@ -33,9 +33,9 @@ jobs:
           path: |
             node_modules
             docs
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
+          key: ${{ runner.os }}-config-${{ hashFiles('**/config.js') }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-config-
       - name: Install dependencies
         if: steps.docs-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
