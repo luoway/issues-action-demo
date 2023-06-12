@@ -10,8 +10,10 @@ const {
     action,
     labels,
     actionLabel,
-    acceptLabels,
 } = require('./utils/constants')
+const {
+    acceptLabels,
+} = require('./config')
 
 !(async function () {
     if(actionLabel && !acceptLabels.includes(actionLabel)) {

@@ -3,8 +3,10 @@ const {graphqlWithAuth} = require('./gl')
 const {
     owner,
     repoName,
-    acceptLabels,
 } = require('./constants')
+const {
+    acceptLabels,
+} = require('../config')
 
 const pageSize = 100 // github api limit
 const total = []
