@@ -5,6 +5,7 @@ module.exports = {
     number: process.env.GITHUB_ISSUE_NUMBER,
     action: process.env.GITHUB_EVENT_ACTION,
     labels: process.env.GITHUB_ISSUE_LABELS,
+    actionLabel: process.env.GITHUB_ISSUE_LABEL,
     
     acceptLabels: ['deploy'], // 多于一项，则显示为侧边栏分组标题
 }

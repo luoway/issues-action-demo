@@ -9,11 +9,13 @@ const {
     number,
     action,
     labels,
+    actionLabel,
     acceptLabels,
 } = require('./utils/constants')
 
 !(async function () {
-    const label = labels.split(',').find(item => acceptLabels.includes(item))
+    const label = actionLabel || labels.split(',').find(item => acceptLabels.includes(item))
+
     if(!label) {
         console.log('labels not match acceptLabels', labels)
         return process.exit(1)
@@ -21,7 +23,7 @@ const {
 
     if (['reopened', 'edited', 'labeled'].includes(action)) {
         console.log('add or update issue', number)
-        // add
+
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
         const p2 = getIssue(number)

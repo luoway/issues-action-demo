@@ -7,6 +7,7 @@ env:
   GITHUB_OWNER: ${{ github.repository_owner }}
   GITHUB_REPO: ${{ github.repository }}
   GITHUB_ISSUE_NUMBER: ${{ github.event.issue.number }}
+  GITHUB_ISSUE_LABEL: ${{ github.event.label.name }}
   GITHUB_ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
   GITHUB_EVENT_ACTION: ${{ github.event.action }}
 jobs:
