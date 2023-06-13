@@ -61,10 +61,11 @@ function write(issues, labels){
 }
 
 function insert(issueData, label){
+    console.log(64, issueData, label)
     const sidebar = read()
     let list = label && sidebar.find(group=>group.text === label) || sidebar
     if(list.items) list = list.items
-    
+    console.log(68, list)
     const foundIndex = list.findIndex(issue=>{
         console.log(issue)
         const {link} = issue
@@ -73,7 +74,7 @@ function insert(issueData, label){
             return true
         } 
     })
-
+    console.log(77, foundIndex)
     if(foundIndex > -1) {
         let isReplace = 0
         if( list[foundIndex].link.slice(1) === String(issueData.number) ) isReplace = 1
