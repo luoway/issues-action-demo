@@ -85,7 +85,7 @@ function insert(issueData, label){
     _writeFile(sidebar)
 }
 
-function _remove(number, list){
+function _remove(number, label, list){
     if(!list) list = read()
 
     if(list[0]?.link){
@@ -96,15 +96,16 @@ function _remove(number, list){
         }
     }else if(list[0]?.items){
         for(let group of list){
-            _remove(number, group.items)
+            if(group.text === label) _remove(number, label, group.items)
         }
         return list
     }
 }
 
-function remove(number){
-    const sidebar = _remove(number)
+function remove(number, label){
+    const sidebar = _remove(number, label)
     if(sidebar) _writeFile(sidebar)
+    return sidebar
 }
 
 module.exports = {
