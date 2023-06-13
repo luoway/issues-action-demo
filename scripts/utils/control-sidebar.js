@@ -64,8 +64,9 @@ function write(issues, labels){
 function insert(issueData, label){
     const sidebar = read()
     const list = label && sidebar.find(group=>group.text === label) || sidebar
-    
+    console.log(list)
     const foundIndex = list.findIndex(issue=>{
+        console.log(issue)
         const {link} = issue
         const num = parseInt(link.slice(1))
         if(num >= issueData.number){
