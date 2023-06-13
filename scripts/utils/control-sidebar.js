@@ -32,7 +32,6 @@ function genSidebar(issues, labels){
             const labelGroup = labelMap[label.name]
             if(!labelGroup) continue
             labelGroup.items.push(genItem(issue))
-            break
         }
     })
     return Object.values(labelMap)
@@ -97,10 +96,9 @@ function _remove(number, list){
         }
     }else if(list[0]?.items){
         for(let group of list){
-            if(_remove(number, group.items)){
-                return list
-            }
+            _remove(number, group.items)
         }
+        return list
     }
 }
 
