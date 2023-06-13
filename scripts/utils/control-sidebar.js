@@ -78,6 +78,7 @@ function insert(issueData, label){
     if(foundIndex > -1) {
         let isReplace = 0
         if( list[foundIndex].link.slice(1) === String(issueData.number) ) isReplace = 1
+        console.log(list[foundIndex].link.slice(1), issueData.number, isReplace)
         list.splice(foundIndex, isReplace, genItem(issueData))
     } else {
         list.push(genItem(issueData))
