@@ -63,8 +63,9 @@ function write(issues, labels){
 
 function insert(issueData, label){
     const sidebar = read()
-    const list = label && sidebar.find(group=>group.text === label) || sidebar
-    console.log(list)
+    let list = label && sidebar.find(group=>group.text === label) || sidebar
+    if(list.items) list = list.items
+    
     const foundIndex = list.findIndex(issue=>{
         console.log(issue)
         const {link} = issue
