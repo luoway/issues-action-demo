@@ -33,7 +33,7 @@ jobs:
           path: |
             node_modules
             docs
-          key: ${{ runner.os }}-config-${{ hashFiles('**/config.js') }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
+          key: ${{ runner.os }}-config-${{ hashFiles('**/config.js') }}-${{ hashFiles('**/sidebar.js') }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
           restore-keys: |
             ${{ runner.os }}-config-
       - name: Install dependencies
