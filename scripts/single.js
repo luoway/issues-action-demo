@@ -48,8 +48,9 @@ const {
             Sidebar.insert(issueData, label)
         }
     }else{
-        console.log('remove issue', number)
+        console.log('remove issue', number, label)
         const sidebar = Sidebar.remove(number, label)
+        console.log(53, sidebar)
         if(!sidebar.some(group=>{
             if(group.link) return group.link === '/'+number
             else if(group.items) return group.items.some(item => item.link === '/'+number)
