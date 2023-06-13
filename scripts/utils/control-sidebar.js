@@ -98,13 +98,14 @@ function _remove(number, label, list){
         for(let group of list){
             if(group.text === label) _remove(number, label, group.items)
         }
-        return list
     }
+    
+    return list
 }
 
 function remove(number, label){
     const sidebar = _remove(number, label)
-    if(sidebar) _writeFile(sidebar)
+    _writeFile(sidebar)
     return sidebar
 }
 
