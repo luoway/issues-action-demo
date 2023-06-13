@@ -65,7 +65,7 @@ function insert(issueData, label){
     const sidebar = read()
     let list = label && sidebar.find(group=>group.text === label) || sidebar
     if(list.items) list = list.items
-    console.log(68, list)
+    console.log(68, list, sidebar)
     const foundIndex = list.findIndex(issue=>{
         console.log(issue)
         const {link} = issue
