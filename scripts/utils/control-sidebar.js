@@ -82,7 +82,7 @@ function insert(issueData, label){
     } else {
         list.push(genItem(issueData))
     }
-
+    console.log(85, sidebar)
     _writeFile(sidebar)
 }
 
