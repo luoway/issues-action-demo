@@ -49,7 +49,12 @@ const {
         }
     }else{
         console.log('remove issue', number)
-        removeDoc(number)
-        Sidebar.remove(number)
+        const sidebar = Sidebar.remove(number, label)
+        if(!sidebar.some(group=>{
+            if(group.link) return group.link === '/'+number
+            else if(group.items) return group.items.some(item => item.link === '/'+number)
+        })) {
+            removeDoc(number)
+        }
     }
 })()
