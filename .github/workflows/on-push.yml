@@ -9,6 +9,7 @@ on:
 permissions:
   pages: write
   id-token: write
+  # push
   contents: write
 
 env:
@@ -45,8 +46,8 @@ jobs:
         run: yarn build --base /${{ github.event.repository.name }}/
       - name: Push to new branch
         run: |
-          git config --local user.email luoway@outlook.com
-          git config --local user.name luoway
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add -A
           git commit -m "bot push"
       - name: Push changes

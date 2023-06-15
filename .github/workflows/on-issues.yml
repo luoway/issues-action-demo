@@ -2,6 +2,13 @@ name: on-issues
 on:
   issues:
     types: ['labeled', 'unlabeled', 'edited', 'reopened', 'closed', 'deleted']
+
+permissions:
+  pages: write
+  id-token: write
+  # push
+  contents: write
+
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_OWNER: ${{ github.repository_owner }}
@@ -10,12 +17,10 @@ env:
   GITHUB_ISSUE_LABEL: ${{ github.event.label.name }}
   GITHUB_ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
   GITHUB_EVENT_ACTION: ${{ github.event.action }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -49,8 +54,8 @@ jobs:
 
       - name: Push
         run: |
-          git config --local user.email luoway@outlook.com
-          git config --local user.name luoway
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add -A
           git commit -m "bot update"
       
