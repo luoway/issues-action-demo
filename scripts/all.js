@@ -1,7 +1,7 @@
 const path = require('path')
 const fse = require('fs-extra')
-const { getIssues } = require('./utils/gl-issues-list')
-const { getIssue } = require('./utils/gl-issue')
+const { getIssues } = require('./utils/gh-issues-list')
+const { getIssue } = require('./utils/gh-issue')
 const { writeDoc, cleanDoc } = require('./utils/write-doc')
 const Sidebar = require('./utils/control-sidebar')
 
