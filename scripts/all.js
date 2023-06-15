@@ -2,8 +2,8 @@ const path = require('path')
 const fse = require('fs-extra')
 const { getIssues } = require('./utils/gh-issues-list')
 const { getIssue } = require('./utils/gh-issue')
-const { writeDoc, cleanDoc } = require('./utils/write-doc')
-const Sidebar = require('./utils/control-sidebar')
+const { writeDoc, cleanDoc } = require('./utils/handle-doc')
+const Sidebar = require('./utils/handle-sidebar')
 
 const targetDir = path.join(__dirname, '../docs')
 const {
