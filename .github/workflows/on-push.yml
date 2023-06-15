@@ -9,9 +9,6 @@ on:
 permissions:
   pages: write
   id-token: write
-  actions: write
-  contents: write
-  deployments: write
   security-events: write
 
 env:
