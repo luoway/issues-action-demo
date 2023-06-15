@@ -62,6 +62,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
+          branch: issues-page
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/configure-pages@v2
