@@ -16,6 +16,7 @@ const {
 } = require('./config')
 
 !(async function () {
+    // TODO: Sidebar.update
     if(actionLabel && !acceptLabels.includes(actionLabel)) {
         console.log(`action label '${actionLabel}' not match acceptLabels: ${acceptLabels}`)
         return process.exit(1)
