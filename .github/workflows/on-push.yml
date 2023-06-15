@@ -9,16 +9,10 @@ on:
 permissions:
   pages: write
   id-token: write
-  pull-requests: write
-  repository-projects: write
   actions: write
-  checks: write
   contents: write
   deployments: write
-  issues: write
-  packages: write
   security-events: write
-  statuses: write
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
