@@ -9,7 +9,7 @@ on:
 permissions:
   pages: write
   id-token: write
-  actions: write
+  contents: write
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
