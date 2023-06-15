@@ -9,6 +9,8 @@ on:
 permissions:
   pages: write
   id-token: write
+  pull-requests: write
+  repository-projects: write
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
