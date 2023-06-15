@@ -49,8 +49,8 @@ jobs:
 
       - name: Push
         run: |
-          git config --global user.email luoway@outlook.com
-          git config --global user.name luoway
+          git config --local user.email luoway@outlook.com
+          git config --local user.name luoway
           git add -A
           git commit -m "bot update"
       
