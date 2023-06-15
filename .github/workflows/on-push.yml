@@ -26,18 +26,17 @@ jobs:
         with:
           node-version: 16
           cache: yarn
-      - name: Cache dependencies and docs
+      - name: Cache dependencies
         uses: actions/cache@v3
-        id: docs-cache
+        id: yarn-cache
         with:
           path: |
             node_modules
-            docs
-          key: ${{ runner.os }}-config-${{ hashFiles('**/config.js') }}-${{ hashFiles('**/sidebar.js') }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
           restore-keys: |
-            ${{ runner.os }}-config-
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
-        if: steps.docs-cache.outputs.cache-hit != 'true'
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
       - name: Get issues
         run: yarn all
