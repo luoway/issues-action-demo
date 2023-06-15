@@ -42,6 +42,17 @@ jobs:
         run: yarn all
       - name: Build
         run: yarn build --base /${{ github.event.repository.name }}/
+      - name: Push to new branch
+        run: |
+          git branch -D issues-page
+          git checkout -b issues-page
+          git add -A
+          git commit -m "bot push"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:

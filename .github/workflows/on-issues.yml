@@ -11,7 +11,7 @@ env:
   GITHUB_ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
   GITHUB_EVENT_ACTION: ${{ github.event.action }}
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          ref: issues-page
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -36,17 +36,38 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }} }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
+
       - name: Get issue
         run: yarn single
+
       - name: Build
         run: yarn build --base /${{ github.event.repository.name }}/
+
+      - name: Push
+        run: |
+          git add -A
+          git commit -m "bot update"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
           path: docs/.vitepress/dist
-      - name: Deploy
-        id: deployment
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    steps:
+      - id: deployment
         uses: actions/deploy-pages@v1
