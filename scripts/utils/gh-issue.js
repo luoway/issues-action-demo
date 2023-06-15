@@ -1,4 +1,4 @@
-const {graphqlWithAuth} = require('./gl')
+const {graphqlWithAuth} = require('./gh')
 const {
     owner,
     repoName
