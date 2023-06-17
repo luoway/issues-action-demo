@@ -6,5 +6,5 @@ module.exports = {
     action: process.env.GITHUB_EVENT_ACTION,
     labels: process.env.GITHUB_ISSUE_LABELS,
     actionLabel: process.env.GITHUB_ISSUE_LABEL,
-    acceptLabels: process.env.ACCEPT_LABELS.split(','),
+    acceptLabels: process.env.ACCEPT_LABELS,
 }

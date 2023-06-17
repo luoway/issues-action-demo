@@ -14,8 +14,9 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
-    console.log(17, labels)
-    const renderLabels = labels ? labels.filter(label=>acceptLabels.includes(label)) : []
+    const labelList = labels ? labels.split(',') : []
+    const acceptLabelList = acceptLabels ? acceptLabels.split(',') : []
+    const renderLabels = labelList.filter(label=>acceptLabelList.includes(label))
 
     if(renderLabels.length === 0){
         //remove
@@ -24,7 +25,7 @@ const {
         return
     }
     
-    if(labels.contains(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
+    if(labelList.contains(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
         //update file
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
