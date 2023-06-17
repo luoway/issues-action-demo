@@ -30,6 +30,7 @@ jobs:
       - name: check label
         if: "!contains('${{env.ACCEPT_LABELS}}', '${{env.GITHUB_ISSUE_LABEL}}')"
         run: |
+          echo "!contains('${{env.ACCEPT_LABELS}}', '${{env.GITHUB_ISSUE_LABEL}}')"
           fail "skip label"
         
   build:
