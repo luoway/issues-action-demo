@@ -14,6 +14,7 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
+    console.log(labels)
     const renderLabels = labels.filter(label=>acceptLabels.includes(label))
 
     if(renderLabels.length === 0){
