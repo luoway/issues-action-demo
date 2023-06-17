@@ -21,8 +21,16 @@ env:
   GITHUB_ISSUE_LABEL: ${{ github.event.label.name }}
   GITHUB_ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
   GITHUB_EVENT_ACTION: ${{ github.event.action }}
+  ACCEPT_LABELS: 'deploy'
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check label
+        if: "!contains(${{env.ACCEPT_LABELS}}, '${{env.GITHUB_ISSUE_LABEL}}')"
+        run: fail "skip label"
+        
   build:
     runs-on: ubuntu-latest
     environment:

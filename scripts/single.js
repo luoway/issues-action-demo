@@ -10,27 +10,21 @@ const {
     action,
     labels,
     actionLabel,
-} = require('./utils/constants')
-const {
     acceptLabels,
-} = require('./config')
+} = require('./utils/constants')
 
 !(async function () {
-    // TODO: Sidebar.update
-    if(actionLabel && !acceptLabels.includes(actionLabel)) {
-        console.log(`action label '${actionLabel}' not match acceptLabels: ${acceptLabels}`)
-        return process.exit(1)
+    const renderLabels = labels.filter(label=>acceptLabels.includes(label))
+
+    if(renderLabels.length === 0){
+        //remove
+        removeDoc(number)
+        Sidebar.remove(number)
+        return
     }
-
-    const label = actionLabel || labels.split(',').find(item => acceptLabels.includes(item))
-    if(!label) {
-        console.log('issue labels not match acceptLabels', labels)
-        return process.exit(1)
-    }
-
-    if (['reopened', 'edited', 'labeled'].includes(action)) {
-        console.log('add or update issue', number)
-
+    
+    if(labels.contains(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
+        //update file
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
         const p2 = getIssue(number)
@@ -46,17 +40,10 @@ const {
 
         if(issueData) {
             writeDoc(filePath, issueData)
-            Sidebar.insert(issueData, label)
+            Sidebar.update(number, renderLabels)
         }
     }else{
-        console.log('remove issue', number, label)
-        const sidebar = Sidebar.remove(number, label)
-        console.log(53, sidebar)
-        if(!sidebar.some(group=>{
-            if(group.link) return group.link === '/'+number
-            else if(group.items) return group.items.some(item => item.link === '/'+number)
-        })) {
-            removeDoc(number)
-        }
+        //update sidebar
+        Sidebar.update(number, renderLabels)
     }
 })()

@@ -3,10 +3,8 @@ const {graphqlWithAuth} = require('./gh')
 const {
     owner,
     repoName,
-} = require('./constants')
-const {
     acceptLabels,
-} = require('../config')
+} = require('./constants')
 
 const pageSize = 100 // github api limit
 const total = []
@@ -19,7 +17,7 @@ async function getIssues(labels){
                 issues(
                     orderBy: {
                         field: CREATED_AT, 
-                        direction: DESC
+                        direction: ASC
                     }, 
                     labels: ${acceptLabels ? `${JSON.stringify(acceptLabels)}` : null}, 
                     first: ${pageSize},

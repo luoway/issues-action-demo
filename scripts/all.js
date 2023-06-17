@@ -8,7 +8,7 @@ const Sidebar = require('./utils/handle-sidebar')
 const targetDir = path.join(__dirname, '../docs')
 const {
     acceptLabels,
-} = require('./config')
+} = require('./utils/constants')
 
 !(async function () {
     const p = cleanDoc()

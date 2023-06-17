@@ -17,7 +17,7 @@ function genGroup(label){
 
 function genSidebar(issues, labels){
     if(labels.length === 1){
-        // 不显示分组
+        // only one acceptLabel, hide group
         return issues.filter(issue=>{
             return !issue.node.labels.nodes.includes(labels[0])
         }).map(genItem)
@@ -60,60 +60,61 @@ function write(issues, labels){
     _writeFile(sidebar)
 }
 
-function insert(issueData, label){
-    console.log(64, issueData, label)
+function remove(number){
     const sidebar = read()
-    let list = label && sidebar.find(group=>group.text === label) || sidebar
-    if(list.items) list = list.items
-    console.log(68, list, sidebar)
-    const foundIndex = list.findIndex(issue=>{
-        console.log(issue)
-        const {link} = issue
-        const num = parseInt(link.slice(1))
-        if(num >= issueData.number){
-            return true
-        } 
-    })
-    console.log(77, foundIndex)
-    if(foundIndex > -1) {
-        let isReplace = 0
-        if( list[foundIndex].link.slice(1) === String(issueData.number) ) isReplace = 1
-        console.log(list[foundIndex].link.slice(1), issueData.number, isReplace)
-        list.splice(foundIndex, isReplace, genItem(issueData))
-    } else {
-        list.push(genItem(issueData))
-    }
-    console.log(85, sidebar)
-    _writeFile(sidebar)
-}
 
-function _remove(number, label, list){
-    if(!list) list = read()
-
-    if(list[0]?.link){
-        const foundIndex = list.findIndex(item=>item.link.slice(1) === String(number))
-        if(foundIndex > -1){
-            list.splice(foundIndex, 1)
-            return list
-        }
-    }else if(list[0]?.items){
-        for(let group of list){
-            if(group.text === label) _remove(number, label, group.items)
+    if(sidebar[0]?.link){
+        const foundIndex = sidebar.findIndex(item=>item.link.slice(1) === String(number))
+        if(foundIndex > -1) sidebar.splice(foundIndex, 1)
+    }else if(sidebar[0]?.items){
+        for(let group of sidebar){
+            const foundIndex = group.items.findIndex(item=>parseInt(item.link.slice(1)) === number)
+            if(foundIndex > -1) group.items.splice(foundIndex, 1)
         }
     }
     
-    return list
+    _writeFile(sidebar)
 }
 
-function remove(number, label){
-    const sidebar = _remove(number, label)
+function update(number, labels){
+    const sidebar = read()
+
+    if(sidebar[0]?.link){
+        // only one acceptLabel
+        for(let i=0; i<sidebar.length; i++){
+            const item = sidebar[i]
+            const currentNum = parseInt(item.link.slice(1))
+            if(currentNum === number) break
+            if(currentNum > number){
+                sidebar.splice(i, 0, genItem(item))
+                break
+            }
+        }
+    }else if(sidebar[0]?.items){
+        for(let group of sidebar){
+            if(labels.includes(group.text)) {
+                for(let i=0; i<group.items.length; i++){
+                    const item = group.items[i]
+                    const currentNum = parseInt(item.link.slice(1))
+                    if(currentNum === number) break
+                    if(currentNum > number){
+                        group.items.splice(i, 0, genItem(item))
+                        break
+                    }
+                }
+            }else{
+                const foundIndex = group.items.findIndex(item=>parseInt(item.link.slice(1)) === number)
+                if(foundIndex > -1) group.items.splice(foundIndex, 1)
+            }
+        }
+    }
+
     _writeFile(sidebar)
-    return sidebar
 }
 
 module.exports = {
     read,
     write,
-    insert,
     remove,
+    update,
 }
