@@ -7,9 +7,7 @@ const Sidebar = require('./utils/handle-sidebar')
 const targetDir = path.join(__dirname, '../docs')
 const {
     number,
-    action,
     labels,
-    actionLabel,
     acceptLabels,
 } = require('./utils/constants')
 
@@ -25,27 +23,22 @@ const {
         return
     }
     
-    if(labelList.includes(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
-        //update file
-        const filePath = path.join(targetDir, `${number}.md`)
-        const p1 = fse.ensureFile(filePath)
-        const p2 = getIssue(number)
-        await p1
+    //add or update file
+    const filePath = path.join(targetDir, `${number}.md`)
+    const p1 = fse.ensureFile(filePath)
+    const p2 = getIssue(number)
+    await p1
 
-        let issueData
-        try {
-            issueData = await p2
-        }catch(e){
-            console.error(e)
-            throw new Error('get issue fail.')
-        }
+    let issueData
+    try {
+        issueData = await p2
+    }catch(e){
+        console.error(e)
+        throw new Error('get issue fail.')
+    }
 
-        if(issueData) {
-            writeDoc(filePath, issueData)
-            Sidebar.update(number, renderLabels)
-        }
-    }else{
-        //update sidebar
+    if(issueData) {
+        writeDoc(filePath, issueData)
         Sidebar.update(number, renderLabels)
     }
 })()
