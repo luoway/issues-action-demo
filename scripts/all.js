@@ -33,5 +33,5 @@ const {
     })
 
     console.log('issues number: ', issues.map(item=>item.node.number))
-    Sidebar.write(issues, acceptLabels)
+    Sidebar.write(issues, labelList)
 })()
