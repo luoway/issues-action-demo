@@ -13,7 +13,7 @@ const {
 !(async function () {
     const p = cleanDoc()
     let issues = []
-    const labelList = labels ? labels.split(',') : []
+    const labelList = acceptLabels ? acceptLabels.split(',') : []
     try{
         issues = await getIssues(labelList)
     }catch(e){
