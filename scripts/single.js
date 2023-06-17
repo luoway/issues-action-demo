@@ -14,8 +14,8 @@ const {
 } = require('./utils/constants')
 
 !(async function () {
-    console.log(labels)
-    const renderLabels = labels.filter(label=>acceptLabels.includes(label))
+    console.log(17, labels)
+    const renderLabels = labels ? labels.filter(label=>acceptLabels.includes(label)) : []
 
     if(renderLabels.length === 0){
         //remove
