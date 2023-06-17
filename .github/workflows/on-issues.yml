@@ -28,10 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check label
-        if: "!contains('${{env.ACCEPT_LABELS}}', '${{env.GITHUB_ISSUE_LABEL}}')"
+        if: "!contains(env.ACCEPT_LABELS, env.GITHUB_ISSUE_LABEL)" 
         run: |
           echo "!contains('${{env.ACCEPT_LABELS}}', '${{env.GITHUB_ISSUE_LABEL}}')"
-          fail "skip label"
+          exit 1
         
   build:
     runs-on: ubuntu-latest
