@@ -25,7 +25,7 @@ const {
         return
     }
     
-    if(labelList.contains(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
+    if(labelList.includes(actionLabel) && ['reopened', 'edited', 'labeled'].includes(action)){
         //update file
         const filePath = path.join(targetDir, `${number}.md`)
         const p1 = fse.ensureFile(filePath)
