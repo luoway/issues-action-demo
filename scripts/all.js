@@ -13,8 +13,9 @@ const {
 !(async function () {
     const p = cleanDoc()
     let issues = []
+    const labelList = labels ? labels.split(',') : []
     try{
-        issues = await getIssues(acceptLabels)
+        issues = await getIssues(labelList)
     }catch(e){
         console.error(e)
         throw new Error('get issues fail.')
