@@ -20,7 +20,7 @@ env:
   ACCEPT_LABELS: 'deploy'
 
 concurrency:
-  group: ${{ github.workflow }}-${{contains(env.ACCEPT_LABELS, env.GITHUB_ISSUE_LABEL)}}
+  group: ${{ github.workflow }}-${{contains( join(github.event.issue.labels.*.name, ','), github.event.label.name )}}
   cancel-in-progress: true
 
 jobs:
