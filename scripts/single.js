@@ -39,6 +39,6 @@ console.log(18, renderLabels)
 
     if(issueData) {
         writeDoc(filePath, issueData)
-        Sidebar.update(number, renderLabels)
+        Sidebar.update(number, renderLabels, acceptLabelList)
     }
 })()

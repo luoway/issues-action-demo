@@ -76,11 +76,10 @@ function remove(number){
     _writeFile(sidebar)
 }
 
-function update(number, labels){
+function update(number, labels, acceptLabels){
     const sidebar = read()
-console.log(81, number, labels)
-console.log(82, sidebar)
-    if(sidebar[0]?.link){
+    
+    if(acceptLabels.length === 1){
         // only one acceptLabel
         for(let i=0; i<sidebar.length; i++){
             const item = sidebar[i]
@@ -91,7 +90,7 @@ console.log(82, sidebar)
                 break
             }
         }
-    }else if(sidebar[0]?.items){
+    }else if(acceptLabels.length > 1){
         for(let group of sidebar){
             if(labels.includes(group.text)) {
                 for(let i=0; i<group.items.length; i++){
@@ -109,7 +108,6 @@ console.log(82, sidebar)
             }
         }
     }
-    console.log(112, sidebar)
 
     _writeFile(sidebar)
 }
