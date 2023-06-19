@@ -78,7 +78,8 @@ function remove(number){
 
 function update(number, labels){
     const sidebar = read()
-
+console.log(81, number, labels)
+console.log(82, sidebar)
     if(sidebar[0]?.link){
         // only one acceptLabel
         for(let i=0; i<sidebar.length; i++){
@@ -108,6 +109,7 @@ function update(number, labels){
             }
         }
     }
+    console.log(112, sidebar)
 
     _writeFile(sidebar)
 }
