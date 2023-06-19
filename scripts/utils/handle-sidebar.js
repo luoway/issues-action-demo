@@ -76,10 +76,11 @@ function remove(number){
     _writeFile(sidebar)
 }
 
-function update(number, labels, acceptLabels){
+function update(issueData, labels, acceptLabels){
     const sidebar = read()
-console.log(81, number, labels)
-console.log(82, acceptLabels.length, sidebar)
+    if(sidebar.length === 0) return write([{node: issueData}], labels)
+    
+    const number = issueData.number
     if(acceptLabels?.length === 1){
         // only one acceptLabel
         for(let i=0; i<sidebar.length; i++){
