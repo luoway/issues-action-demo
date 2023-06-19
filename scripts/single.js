@@ -15,7 +15,7 @@ const {
     const labelList = labels ? labels.split(',') : []
     const acceptLabelList = acceptLabels ? acceptLabels.split(',') : []
     const renderLabels = labelList.filter(label=>acceptLabelList.includes(label))
-
+console.log(18, renderLabels)
     if(renderLabels.length === 0){
         //remove
         removeDoc(number)
