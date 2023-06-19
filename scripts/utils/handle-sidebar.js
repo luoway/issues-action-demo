@@ -78,8 +78,9 @@ function remove(number){
 
 function update(number, labels, acceptLabels){
     const sidebar = read()
-    
-    if(acceptLabels.length === 1){
+console.log(81, number, labels)
+console.log(82, acceptLabels.length, sidebar)
+    if(acceptLabels?.length === 1){
         // only one acceptLabel
         for(let i=0; i<sidebar.length; i++){
             const item = sidebar[i]
@@ -108,6 +109,7 @@ function update(number, labels, acceptLabels){
             }
         }
     }
+    console.log(112, sidebar)
 
     _writeFile(sidebar)
 }
