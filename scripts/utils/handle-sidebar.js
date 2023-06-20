@@ -61,6 +61,7 @@ function write(issues, labels){
 }
 
 function remove(number){
+    console.log('remove', number)
     const sidebar = read()
 
     if(sidebar[0]?.link){
@@ -69,6 +70,7 @@ function remove(number){
     }else if(sidebar[0]?.items){
         for(let group of sidebar){
             const foundIndex = group.items.findIndex(item=>parseInt(item.link.slice(1)) === number)
+            console.log(group, foundIndex)
             if(foundIndex > -1) group.items.splice(foundIndex, 1)
         }
     }
@@ -77,6 +79,7 @@ function remove(number){
 }
 
 function update(issueData, labels, acceptLabels){
+    console.log('update', labels, acceptLabels)
     const sidebar = read()
     if(sidebar.length === 0) return write([{node: issueData}], labels)
     
