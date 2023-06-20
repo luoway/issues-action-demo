@@ -94,10 +94,12 @@ function update(issueData, labels, acceptLabels){
         }
     }else if(acceptLabels.length > 1){
         for(let group of sidebar){
+            console.log(group, group.text, labels)
             if(labels.includes(group.text)) {
                 for(let i=0; i<group.items.length; i++){
                     const item = group.items[i]
                     const currentNum = parseInt(item.link.slice(1))
+                    console.log(currentNum)
                     if(currentNum === number) break
                     if(currentNum > number){
                         group.items.splice(i, 0, genItem(item))
