@@ -13,9 +13,9 @@ const {
 !(async function () {
     const p = cleanDoc()
     let issues = []
-    const labelList = acceptLabels ? acceptLabels.split(',') : []
+    
     try{
-        issues = await getIssues(labelList)
+        issues = await getIssues(acceptLabels)
     }catch(e){
         console.error(e)
         throw new Error('get issues fail.')
@@ -33,5 +33,5 @@ const {
     })
 
     console.log('issues number: ', issues.map(item=>item.node.number))
-    Sidebar.write(issues, labelList)
+    Sidebar.write(issues, acceptLabels)
 })()

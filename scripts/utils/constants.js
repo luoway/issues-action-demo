@@ -1,3 +1,14 @@
+const path = require('path')
+const fse = require('fs-extra')
+
+let acceptLabels = []
+try{
+    const labelrc = fse.readFileSync(path.join(process.cwd(), '.labelrc'), 'utf-8')
+    acceptLabels = labelrc.split(/\r|\n/).filter(Boolean)
+}catch(e){
+    console.error('acceptLabels load fail.', e)
+}
+
 module.exports = {
     token: process.env.GITHUB_TOKEN,
     owner: process.env.GITHUB_OWNER,
@@ -6,5 +17,5 @@ module.exports = {
     action: process.env.GITHUB_EVENT_ACTION,
     labels: process.env.GITHUB_ISSUE_LABELS,
     actionLabel: process.env.GITHUB_ISSUE_LABEL,
-    acceptLabels: process.env.ACCEPT_LABELS,
+    acceptLabels,
 }

@@ -13,8 +13,7 @@ const {
 
 !(async function () {
     const labelList = labels ? labels.split(',') : []
-    const acceptLabelList = acceptLabels ? acceptLabels.split(',') : []
-    const renderLabels = labelList.filter(label=>acceptLabelList.includes(label))
+    const renderLabels = labelList.filter(label=>acceptLabels.includes(label))
 
     if(renderLabels.length === 0){
         //remove
@@ -39,6 +38,6 @@ const {
 
     if(issueData) {
         writeDoc(filePath, issueData)
-        Sidebar.update(issueData, renderLabels, acceptLabelList)
+        Sidebar.update(issueData, renderLabels, acceptLabels)
     }
 })()
