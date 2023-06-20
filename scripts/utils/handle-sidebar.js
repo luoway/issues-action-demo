@@ -94,12 +94,16 @@ function update(issueData, labels, acceptLabels){
         }
     }else if(acceptLabels.length > 1){
         for(let group of sidebar){
-            console.log(group, group.text, labels)
             if(labels.includes(group.text)) {
+                if(group.items.length === 0) {
+                    group.items.push(genItem(issueData))
+                    continue
+                }
+
                 for(let i=0; i<group.items.length; i++){
                     const item = group.items[i]
                     const currentNum = parseInt(item.link.slice(1))
-                    console.log(currentNum)
+                    
                     if(currentNum === number) break
                     if(currentNum > number){
                         group.items.splice(i, 0, genItem(item))
@@ -112,7 +116,6 @@ function update(issueData, labels, acceptLabels){
             }
         }
     }
-    console.log(112, sidebar)
 
     _writeFile(sidebar)
 }
