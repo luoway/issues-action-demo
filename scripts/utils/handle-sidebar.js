@@ -69,7 +69,10 @@ function remove(number){
         if(foundIndex > -1) sidebar.splice(foundIndex, 1)
     }else if(sidebar[0]?.items){
         for(let group of sidebar){
-            const foundIndex = group.items.findIndex(item=>parseInt(item.link.slice(1)) === number)
+            const foundIndex = group.items.findIndex(item=>{
+                console.log(item.link.slice(1))
+                return parseInt(item.link.slice(1)) === number
+            })
             console.log(group, foundIndex)
             if(foundIndex > -1) group.items.splice(foundIndex, 1)
         }
