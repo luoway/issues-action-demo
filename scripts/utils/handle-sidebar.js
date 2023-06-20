@@ -78,7 +78,7 @@ function remove(number){
 }
 
 function update(issueData, labels, acceptLabels){
-    console.log('update', labels, acceptLabels)
+    console.log('update', issueData, labels, acceptLabels)
     const sidebar = read()
     if(sidebar.length === 0) return write([{node: issueData}], labels)
     
