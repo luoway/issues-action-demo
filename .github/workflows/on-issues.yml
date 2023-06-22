@@ -80,3 +80,13 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v1
+
+  fallback:
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ failure() }}
+    steps:
+      - name: trigger on-push
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: on-push.yml
