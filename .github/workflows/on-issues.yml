@@ -23,16 +23,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check-owner:
+  check_owner:
     runs-on: ubuntu-latest
     steps:
-      - name: check-owner
+      - name: check_owner
+        id: check_owner
         if: ${{ github.actor != github.repository_owner }}
         run: exit 1
 
   build:
     runs-on: ubuntu-latest
-    needs: check-owner
+    needs: check_owner
     steps:
       - uses: actions/checkout@v3
         with:
@@ -97,7 +98,9 @@ jobs:
     needs: build
     if: ${{ failure() }}
     steps:
-      - name: trigger on-push
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: on-push.yml
+      - name: test
+        run: echo "${{ steps.check_owner.conclusion }} "
+      # - name: trigger on-push
+      #   uses: benc-uk/workflow-dispatch@v1
+      #   with:
+      #     workflow: on-push.yml
