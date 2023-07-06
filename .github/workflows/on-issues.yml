@@ -27,7 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check-owner
-        run: echo "${{ github.actor }}, ${{github.env.GITHUB_OWNER}}"
+        if: ${{ github.actor != github.repository_owner }}
+        run: exit 1
 
   build:
     runs-on: ubuntu-latest
