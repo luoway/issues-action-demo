@@ -23,8 +23,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check-owner
+        run: echo "${{ github.actor }}, ${{github.env.GITHUB_OWNER}}"
+
   build:
     runs-on: ubuntu-latest
+    needs: check-owner
     steps:
       - uses: actions/checkout@v3
         with:
