@@ -1,1 +1,1 @@
-export default []
+export default [{"text":"deploy","items":[{"text":"issues test","link":"/1"},{"text":"second issue","link":"/2"}]},{"text":"test","items":[{"text":"issues test","link":"/1"},{"text":"second issue","link":"/2"}]}]
