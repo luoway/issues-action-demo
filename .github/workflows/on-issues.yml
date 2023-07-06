@@ -99,7 +99,7 @@ jobs:
     if: ${{ failure() }}
     steps:
       - name: test
-        run: echo "${{ steps.check_owner.conclusion }} "
+        run: echo "${{ needs.check_owner.result }} "
       # - name: trigger on-push
       #   uses: benc-uk/workflow-dispatch@v1
       #   with:
